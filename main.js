@@ -70,7 +70,7 @@ const containerDiv = document.getElementById("container");
 
 
 // per ogni oggetto di post
-posts.forEach((post)=>{
+posts.forEach((post , index)=>{
 
     // inserisci
     containerDiv.innerHTML += `
@@ -93,18 +93,29 @@ posts.forEach((post)=>{
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a id="like-button-${index}" class="like-button  js-like-button" href="javascript:void(0);" data-postid="${index}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${post.likes}</b> persone
+                        Piace a <b id="like-counter-${index}" class="js-likes-counter">${post.likes}</b> persone
                     </div>
                 </div> 
             </div>            
-        </div>
-    `
+        </div>`;
 
-
-});
+        
+        const likeButton = document.getElementById(`like-button-${index}`);
+    
+        likeButton.addEventListener("click", function () {
+            likeClick(index);
+        });
+    });
+    
+    // Funzioni
+    function likeClick(postIndex) {
+        posts[postIndex].likes++;
+        const likeCounter = document.getElementById(`like-counter-${postIndex}`);
+        likeCounter.innerHTML = posts[postIndex].likes;
+    }
