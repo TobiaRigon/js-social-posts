@@ -105,15 +105,18 @@ posts.forEach((post , index)=>{
             </div>            
         </div>`;
 
-        
+    });
+
+    // Registrazione degli eventi dopo aver creato tutti gli elementi HTML
+    posts.forEach((post, index) => {
         const likeButton = document.getElementById(`like-button-${index}`);
-    
+        
         likeButton.addEventListener("click", function () {
             likeClick(index);
         });
     });
     
-    // Funzioni
+    // Funzione per gestire il click sul pulsante "Mi Piace"
     function likeClick(postIndex) {
         posts[postIndex].likes++;
         const likeCounter = document.getElementById(`like-counter-${postIndex}`);
